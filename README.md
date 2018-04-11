@@ -4,10 +4,9 @@ Chatbot app for CSS 497 using CORDOVA in development
 https://cordova.apache.org/
 
 Main purpose 
-- Chat bot
-- Reminder user 
+- Chat bot save user t-do list
 
-after fork this repo please install this package via cmd 
+after clone this repo please install this package via cmd 
 ---------
 npm install firebase --save
 
