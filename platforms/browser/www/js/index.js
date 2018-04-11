@@ -23,11 +23,13 @@ var app = {
     },
 
     // deviceready Event Handler
-    //
+    //  
     // Bind any cordova events here. Common events are:
     // 'pause', 'resume', etc.
     onDeviceReady: function() {
         this.receivedEvent('deviceready');
+        console.log("page swap")
+        window.location="chatroom.html"
     },
 
     // Update DOM on a Received Event
