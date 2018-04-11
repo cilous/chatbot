@@ -28,8 +28,6 @@ var app = {
     // 'pause', 'resume', etc.
     onDeviceReady: function() {
         this.receivedEvent('deviceready');
-        console.log("page swap")
-        window.location="chatroom.html"
     },
 
     // Update DOM on a Received Event
