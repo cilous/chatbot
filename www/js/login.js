@@ -12,6 +12,7 @@ $('#login').on('click', async function(){
     })
     console.log("ข้อความนี้ควรขึ้นทีหลัง")
     console.log("login success")
+    window.location = "chatroom.html"
     // ทำการดึงข้อมูลใน database
 })
 

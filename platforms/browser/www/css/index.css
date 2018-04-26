@@ -10,3 +10,13 @@ body {
     align-items: center;
     text-align: center;
 }
+
+#frame {
+    width: 95%;
+    min-width: 360px;
+    max-width: 1000px;
+    height: 92vh;
+    min-height: 300px;
+    max-height: 720px;
+    background: #E6EAEA;
+}

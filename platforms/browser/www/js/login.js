@@ -3,15 +3,20 @@ $('#login').on('click', async function(){
     username = $('#username').val() + "@mail.com"
     password = "password"
     firebase.auth().signInWithEmailAndPassword(username.toString() , password ).catch(function (error){
-        console.log("catch")        
+        console.log("ข้อความนี้ควรขึ้นทีหลัง")
         var errorCode = error.errorCode
         var errorMessage = error.message
-        alert(errorMessage);
-    },function (){
-        console.log("not catch")
+        console.log("login failed")
+        alert(errorMessage)
+        // สร้าง user ใหม่ใน database
     })
+    console.log("ข้อความนี้ควรขึ้นทีหลัง")
+    console.log("login success")
+    window.location = "chatroom.html"
+    // ทำการดึงข้อมูลใน database
 })
 
-function validateLogin(status1, status2) {
+// หาวิธีดักจับแยกให้ออก ระหว่าง user ที่มีใน database และ ไม่มีใน database
+// ถ้าไม่มีจะเข้า catch ด้านบน แต่ถ้ามีจะวิ่งผ่านมาเลย
+// ประเด็นคือ ถ้าไม่มีแล้วโดน catch มันจะทำบรรทัดล่างก่อน ไม่ยอมรอข้างบนจนเสร็จ
 
-}

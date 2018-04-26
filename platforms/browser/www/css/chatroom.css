@@ -1,0 +1,96 @@
+html,
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: #27ae60;
+    font-family: "proxima-nova", "Source Sans Pro", sans-serif;
+    font-size: 1em;
+    letter-spacing: 0.1px;
+    color: #32465a;
+    text-rendering: optimizeLegibility;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.004);
+    /* -webkit-font-smoothing: antialiased; */
+}
+
+.chat-header {
+    width: 700px;
+    height: 50px;
+    background-color: rgb(221, 221, 221);
+}
+
+.message {
+    width: 700px;
+    background-color: rgb(172, 172, 172);
+}
+
+.message ul {
+    width: 100%;
+}
+
+.message ul li {
+    display: inline-block;
+    clear: both;
+    float: left;
+    margin: 15px 15px 5px 15px;
+    width: calc(100% - 25px);
+    font-size: 0.9em;
+}
+
+img {
+    height: 50px;
+    width: 50px;
+}
+
+.message ul li p {
+    display: inline-block;
+    padding: 10px 15px;
+    border-radius: 20px;
+    max-width: 205px;
+    line-height: 130%;
+}
+
+.message ul li.sent img {
+    float: right;
+}
+
+.message ul li.sent p {
+    float: right;
+    background: #435f7a;
+    color: #f5f5f5;
+}
+
+.message ul li.recieve img {
+    float: left;
+}
+
+.message ul li.recieve p {
+    float: left;
+    background: #c4c4c4;
+    color: black;
+}
+
+.message-input {
+    width: 700px;
+    background-color: rgb(95, 95, 95);
+}
+
+.message-input .wrap {
+    position: relative;
+}
+
+.message-input .wrap input {
+    float: left;
+    border: none;
+    /* width : calc(100% - 90px); */
+    width: 600px;
+    padding: 11px 32px 10px 8px;
+    color: #32465a;
+}
+
+.message-input .wrap button.submit {
+    width: 100px;
+    border: 10px;
+    height: 100%;
+}
