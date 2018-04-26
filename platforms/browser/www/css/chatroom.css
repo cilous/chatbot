@@ -11,7 +11,7 @@ body {
     color: #32465a;
     text-rendering: optimizeLegibility;
     text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.004);
-    /* -webkit-font-smoothing: antialiased; */
+    -webkit-font-smoothing: antialiased;
 }
 
 .chat-header {
@@ -83,7 +83,6 @@ img {
 .message-input .wrap input {
     float: left;
     border: none;
-    /* width : calc(100% - 90px); */
     width: 600px;
     padding: 11px 32px 10px 8px;
     color: #32465a;
