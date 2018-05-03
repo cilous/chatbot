@@ -14,19 +14,37 @@ body {
     -webkit-font-smoothing: antialiased;
 }
 
-.chat-header {
-    width: 700px;
-    height: 50px;
-    background-color: rgb(221, 221, 221);
+div {
+    display: block;
 }
 
-.message {
+.chat-header {
+    width: 700px;
+    height : 50px;
+    background-color: rgb(221, 221, 221);
+
+}
+
+.container .message {
     width: 700px;
     background-color: rgb(172, 172, 172);
+    height: 700px;
+    overflow: scroll;
+}
+
+
+.container .message::-webkit-scrollbar {
+    width: 8px;
+    background: transparent;
+}
+
+.container .message::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.3);
 }
 
 .message ul {
     width: 100%;
+    padding-left: 0px;
 }
 
 .message ul li {
@@ -56,24 +74,25 @@ img {
 }
 
 .message ul li.sent p {
-    float: right;
+    float : right;
     background: #435f7a;
     color: #f5f5f5;
 }
 
 .message ul li.recieve img {
-    float: left;
+    float : left;
 }
 
 .message ul li.recieve p {
     float: left;
-    background: #c4c4c4;
+    background: #ffffff;
     color: black;
 }
 
 .message-input {
     width: 700px;
     background-color: rgb(95, 95, 95);
+    
 }
 
 .message-input .wrap {
@@ -81,8 +100,9 @@ img {
 }
 
 .message-input .wrap input {
-    float: left;
+    float : left;
     border: none;
+    /* width : calc(100% - 90px); */
     width: 600px;
     padding: 11px 32px 10px 8px;
     color: #32465a;
@@ -93,3 +113,5 @@ img {
     border: 10px;
     height: 100%;
 }
+
+

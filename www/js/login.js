@@ -3,16 +3,15 @@ $('#login').on('click', async function(){
     username = $('#username').val() + "@mail.com"
     password = "password"
     firebase.auth().signInWithEmailAndPassword(username.toString() , password ).catch(function (error){
-        console.log("ข้อความนี้ควรขึ้นทีหลัง")
         var errorCode = error.errorCode
         var errorMessage = error.message
         console.log("login failed")
-        alert(errorMessage)
+        // alert(errorMessage)
         // สร้าง user ใหม่ใน database
     })
-    console.log("ข้อความนี้ควรขึ้นทีหลัง")
     console.log("login success")
-    window.location = "chatroom.html"
+    window.location = 'chatroom.html?name=' + $('#username').val();
+    
     // ทำการดึงข้อมูลใน database
 })
 
