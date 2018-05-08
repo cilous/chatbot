@@ -1,34 +1,24 @@
 html,
 body {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    background: #27ae60;
-    font-family: "proxima-nova", "Source Sans Pro", sans-serif;
-    font-size: 1em;
-    letter-spacing: 0.1px;
-    color: #32465a;
-    text-rendering: optimizeLegibility;
-    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.004);
-    -webkit-font-smoothing: antialiased;
+
 }
 
 div {
-    display: block;
+}
+
+.container{
+
 }
 
 .chat-header {
-    width: 700px;
     height : 50px;
     background-color: rgb(221, 221, 221);
 
 }
 
 .container .message {
-    width: 700px;
     background-color: rgb(172, 172, 172);
-    height: 700px;
+    height: calc(100vh - 50px - 49px);
     overflow: scroll;
 }
 
@@ -87,31 +77,30 @@ img {
     float: left;
     background: #ffffff;
     color: black;
+    width: 100%;
 }
 
 .message-input {
-    width: 700px;
     background-color: rgb(95, 95, 95);
-    
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    margin-left: 0;
+    margin-right: 0;
 }
 
-.message-input .wrap {
-    position: relative;
-}
 
-.message-input .wrap input {
-    float : left;
-    border: none;
-    /* width : calc(100% - 90px); */
-    width: 600px;
+.message-input input {
+    width : 100%;
     padding: 11px 32px 10px 8px;
     color: #32465a;
+    margin-left: 0px;
+    margin-right: 0px;
 }
 
-.message-input .wrap button.submit {
-    width: 100px;
-    border: 10px;
+.message-input button.submit {
+    text-align: center;
+    width: 100%;
     height: 100%;
 }
-
-

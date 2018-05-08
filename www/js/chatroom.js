@@ -6,7 +6,7 @@ function newMessage() {
     }
     $('<li class="sent"><img src="img/male.jpg" alt="" /><p>' + messages + '</p></li>').appendTo($('.message ul'));
     $('.message-input input').val(null);
-    $(".message").animate({ scrollTop: $(document).height() }, "fast");
+    $(".message").animate({ scrollTop: 10000000 }, "fast");
 };
 
 $('.submit').click(function () {
@@ -20,7 +20,7 @@ $(window).on('keydown', function (e) {
     }
 });
 
-$(".message").animate({scrollTop: $(document).height()}, "fast");
+$(".message").animate({scrollTop: 10000000 }, "fast");
 
 var name;
 
@@ -35,7 +35,6 @@ function setName() {
             name = val;
         }
     }
-    console.log(name)    
+    console.log(name)
     $('#name').text(name);
 }
-
