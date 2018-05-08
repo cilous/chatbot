@@ -1,4 +1,4 @@
-var database = firebase.database();
+
 function writeUserData(uid,name) {
   firebase.database().ref('users/' +name).set({
     uid : uid

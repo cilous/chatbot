@@ -7,6 +7,22 @@ function newMessage() {
     $('<li class="sent"><img src="img/male.jpg" alt="" /><p>' + messages + '</p></li>').appendTo($('.message ul'));
     $('.message-input input').val(null);
     $(".message").animate({ scrollTop: 10000000 }, "fast");
+
+    var date = new Date();
+    var time = date.getTime();
+    var type = "send";
+    Count = Count +1;
+    var msgDocName = "msg"+ Count;
+    firebase.database().ref('chats/' +name).update({
+      count: Count
+    });
+
+     firebase.database().ref('chats/' +name +'/' +msgDocName).set({
+       message: messages,
+       time: time,
+       type: type
+     });
+
 };
 
 $('.submit').click(function () {
@@ -23,6 +39,7 @@ $(window).on('keydown', function (e) {
 $(".message").animate({scrollTop: 10000000 }, "fast");
 
 var name;
+var Count;
 
 function setName() {
     var query = window.location.search.substring(1);
@@ -35,6 +52,17 @@ function setName() {
             name = val;
         }
     }
-    console.log(name)
+    console.log(name);
     $('#name').text(name);
+    Count = 0;
+    $(".message-input input").prop('disabled', true);
+    var refCount = firebase.database().ref('chats/' +name +'/count');
+    refCount.on("value", function(snapshot) {
+        if(snapshot.val() != null){
+          Count = snapshot.val();
+        }
+       $(".message-input input").prop('disabled', false);
+    }, function (error) {
+       console.log("Error: " + error.code);
+    });
 }
