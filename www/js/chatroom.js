@@ -42,6 +42,7 @@ var name;
 var Count;
 
 function setName() {
+    $(".message-input input").prop('disabled', true);
     var query = window.location.search.substring(1);
     var parms = query.split('&');
     for (var i = 0; i < parms.length; i++) {
@@ -55,13 +56,30 @@ function setName() {
     console.log(name);
     $('#name').text(name);
     Count = 0;
-    $(".message-input input").prop('disabled', true);
-    var refCount = firebase.database().ref('chats/' +name +'/count');
-    refCount.on("value", function(snapshot) {
-        if(snapshot.val() != null){
-          Count = snapshot.val();
+
+
+    var ref = firebase.database().ref('chats/' +name);
+
+    ref.on("value", function(snapshot) {
+      if(snapshot.val() != null){
+        var obj = snapshot.val();
+        Count = obj.count;
+        var msglt = '';
+        for(var i = 1; i <= Count ; i++){
+          var txtmsg = obj['msg' + i].message;
+          var typemsg = obj['msg' + i].type;
+          if(typemsg == "send"){
+            msglt = msglt + '<li class="sent"><img src="img/male.jpg" alt="" /><p>' + txtmsg + '</p></li>';
+          }
+          else if(typemsg == "receive"){
+            msglt = msglt + '<li class="recieve"><img src="img/bot.png" alt="" /><p>' + txtmsg + '</p></li>';
+          }
         }
-       $(".message-input input").prop('disabled', false);
+        $(msglt).appendTo($('.message ul'));
+        $(".message").animate({ scrollTop: 10000000 }, "fast");
+      }
+
+      $(".message-input input").prop('disabled', false);
     }, function (error) {
        console.log("Error: " + error.code);
     });
