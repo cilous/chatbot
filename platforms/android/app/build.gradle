@@ -91,6 +91,7 @@ ext {
 }
 
 // PLUGIN GRADLE EXTENSIONS START
+apply from: "../cordova-plugin-buildinfo/hellocordova-BuildInfo.gradle"
 // PLUGIN GRADLE EXTENSIONS END
 
 def hasBuildExtras = file('build-extras.gradle').exists()
