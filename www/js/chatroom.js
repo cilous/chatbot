@@ -15,7 +15,7 @@ function newMessage() {
     if(messageType == 'command'){
         if(messages == '!cancel'){
 
-            $('<li class="recieve"><img src="img/bot.png" alt="" /><p style = "margin-top : 7px;">ยกเลิกการบันทึกเรียบร้อย</p></li>').appendTo($('.message ul'));
+            $('<li class="recieve"><img src="img/bot.png" alt="" /><p style = "margin-top : 4px;">ยกเลิกการบันทึกเรียบร้อย</p></li>').appendTo($('.message ul'));
             $('.message-input input').val(null);
             $(".message").animate({scrollTop: 10000000}, "fast");
             setTimeout(function(){ messageType = 'message'; }, 300);
@@ -38,7 +38,7 @@ function newMessage() {
         }
         else{
             $('<li class="sent"><img src="img/male.jpg" alt="" /><p >'+messages+'</p></li>').appendTo($('.message ul'));
-            setTimeout(function(){  $('<li class="recieve"><img src="img/bot.png" alt="" /><p style = "margin-top : 5px;">บันทึกเรียบร้อย</p></li>').appendTo($('.message ul'));
+            setTimeout(function(){  $('<li class="recieve"><img src="img/bot.png" alt="" /><p style = "margin-top : 4px;">บันทึกเรียบร้อย</p></li>').appendTo($('.message ul'));
                 $('.message-input input').val(null);
                 $(".message").animate({scrollTop: 10000000}, "fast");}, 300);
 
@@ -91,7 +91,7 @@ function newMessage() {
 
 
 
-            $('<li class="recieve"><img src="img/bot.png" alt="" /><p style = "margin-top : 7px;">ป้อนสิ่งที่ต้องการบันทึก</p></li>').appendTo($('.message ul'));
+            $('<li class="recieve"><img src="img/bot.png" alt="" /><p style = "margin-top : 4px;">ป้อนสิ่งที่ต้องการบันทึก</p></li>').appendTo($('.message ul'));
             $('.message-input input').val(null);
             $(".message").animate({scrollTop: 10000000}, "fast");
 
@@ -125,7 +125,7 @@ function newMessage() {
                     var msglt = '';
                     for(var i = 1; i <= countTodos ; i++){
                         var txtmsg = obj['todo_name' + i].info;
-                        msglt = msglt + '<li class="recieve"><img src="img/bot.png" alt="" /><p style = "margin-top : 7px;">' + txtmsg + '</p></li>';
+                        msglt = msglt + '<li class="recieve"><img src="img/bot.png" alt="" /><p style = "margin-top : 4px;">' + txtmsg + '</p></li>';
                     }
                     $(msglt).appendTo($('.message ul'));
                     $('.message-input input').val(null);
@@ -154,9 +154,9 @@ function newMessage() {
         }
         else if(messages == '!help'){
 
-            $('<li class="recieve" style="margin-top : 7px; margin-bottom : 7px;"><img src="img/bot.png" alt="" /><p style = "margin-top : 5px; margin-bottom : 0px;">รายการคำสั่ง</p></li>' +
-                '<li class="recieve" style="margin-top : 7px; margin-bottom : 7px;"><img src="img/bot.png" alt="" /><p style = "margin-bottom : 0px;">!set-todo : ใช้บันทึกสิ่งที่ต้องการบันทึก</p></li>' +
-                '<li class="recieve" style="margin-top : 7px; margin-bottom : 7px;"><img src="img/bot.png" alt="" /><p style = "margin-bottom : 0px;">!list-todo : แสดงรายการที่บันทึกลงไป</p></li>').appendTo($('.message ul'));
+            $('<li class="recieve" style="margin-top : 4px; margin-bottom : 4px;"><img src="img/bot.png" alt="" /><p style = "margin-top : 4px; margin-bottom : 0px;">รายการคำสั่ง</p></li>' +
+                '<li class="recieve" style="margin-top : 4px; margin-bottom : 4px;"><img src="img/bot.png" alt="" /><p style = "margin-bottom : 0px;">!set-todo : ใช้บันทึกสิ่งที่ต้องการบันทึก</p></li>' +
+                '<li class="recieve" style="margin-top : 4px; margin-bottom : 4px;"><img src="img/bot.png" alt="" /><p style = "margin-bottom : 0px;">!list-todo : แสดงรายการที่บันทึกลงไป</p></li>').appendTo($('.message ul'));
             $('.message-input input').val(null);
             $(".message").animate({scrollTop: 10000000}, "fast");
 
