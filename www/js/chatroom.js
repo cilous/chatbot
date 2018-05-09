@@ -3,6 +3,7 @@ var messageType = 'message';
 
 function newMessage() {
 
+    var ref = firebase.database().ref('chats/' +name);
     ref.off("value");
 
     messages = $(".message-input input").val();
@@ -125,24 +126,25 @@ function newMessage() {
                     for(var i = 1; i <= countTodos ; i++){
                         var txtmsg = obj['todo_name' + i].info;
                         msglt = msglt + '<li class="recieve"><img src="img/bot.png" alt="" /><p>' + txtmsg + '</p></li>';
-                        var date = new Date();
-                        var time = date.getTime();
-                        var type = "receive";
-                        Count = Count + 1;
-                        var msgDocName = "msg" + Count;
-                        firebase.database().ref('chats/' + name).update({
-                            count: Count
-                        });
-
-                        firebase.database().ref('chats/' + name + '/' + msgDocName).set({
-                            message: txtmsg,
-                            time: time,
-                            type: type
-                        });
                     }
                     $(msglt).appendTo($('.message ul'));
                     $('.message-input input').val(null);
                     $(".message").animate({ scrollTop: 10000000 }, "fast");
+
+                    var date = new Date();
+                    var time = date.getTime();
+                    var type = "receive";
+                    Count = Count + 1;
+                    var msgDocName = "msg" + Count;
+                    firebase.database().ref('chats/' + name).update({
+                        count: Count
+                    });
+
+                    firebase.database().ref('chats/' + name + '/' + msgDocName).set({
+                        message: txtmsg,
+                        time: time,
+                        type: type
+                    });
 
                     refToto.off("value");
                 }
@@ -201,9 +203,7 @@ $(".message").animate({scrollTop: 10000000 }, "fast");
 var name;
 var Count;
 var countTodos;
-var ref = firebase.database().ref('chats/' +name);
 
-var refToto = firebase.database().ref('todos/' +name);
 
 function setName() {
     $(".message-input input").prop('disabled', true);
@@ -222,7 +222,9 @@ function setName() {
     Count = 0;
     countTodos = 0;
 
+    var ref = firebase.database().ref('chats/' +name);
 
+    var refToto = firebase.database().ref('todos/' +name);
 
     refToto.on("value", function(snapshot) {
         var obj = snapshot.val();
