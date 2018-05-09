@@ -72,7 +72,7 @@ function newMessage() {
             });
 
             firebase.database().ref('chats/' + name).update({
-                count: Count +1
+                count: parseInt(Count)+1
             });
 
             firebase.database().ref('chats/' + name + '/' + msgName2).set({
