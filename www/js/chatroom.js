@@ -11,6 +11,70 @@ function newMessage() {
         return false;
     }
 
+    if(messageType == 'uncheck'){
+      if(messages == '!cancel'){
+          $('<li class="recieve"><img src="img/bot.png" alt="" /><p style = "margin-top : 4px;">ยกเลิกคำสั่งยกเลิกขีดค่าเรียบร้อยแล้ว</p></li>').appendTo($('.message ul'));
+          $('.message-input input').val(null);
+          $(".message").animate({scrollTop: 10000000}, "fast");
+          setTimeout(function(){ messageType = 'message'; }, 300);
+          var msg = 'ยกเลิกคำสั่งยกเลิกขีดค่าเรียบร้อยแล้ว';
+          var type = "receive";
+          var check = "no";
+          writeMsg(name,msg,type,check);
+
+      }
+      else {
+        $('<li class="sent"><img src="img/male.jpg" alt="" /><p >'+messages+'</p></li>').appendTo($('.message ul'));
+        setTimeout(function(){  $('<li class="recieve"><img src="img/bot.png" alt="" /><p style = "margin-top : 4px;">ยกเลิกขีดค่าเรียบร้อย</p></li>').appendTo($('.message ul'));
+            $('.message-input input').val(null);
+            $(".message").animate({scrollTop: 10000000}, "fast");}, 300);
+
+
+        var type = "receive";
+
+        writeMsg(name,messages,type,'no');
+        writeMsg(name,'ยกเลิกขีดค่าเรียบร้อย',type,'no');
+
+        setTimeout(function(){ messageType = 'message'; }, 300);
+        firebase.database().ref('todos/' + name + "/todo_name" + Number(messages)).update({
+            check: 'no'
+        });
+
+      }
+    }
+
+    if(messageType == 'check'){
+      if(messages == '!cancel'){
+          $('<li class="recieve"><img src="img/bot.png" alt="" /><p style = "margin-top : 4px;">ยกเลิกคำสั่งขีดค่าเรียบร้อยแล้ว</p></li>').appendTo($('.message ul'));
+          $('.message-input input').val(null);
+          $(".message").animate({scrollTop: 10000000}, "fast");
+          setTimeout(function(){ messageType = 'message'; }, 300);
+          var msg = 'ยกเลิกคำสั่งขีดค่าเรียบร้อยแล้ว';
+          var type = "receive";
+          var check = "no";
+          writeMsg(name,msg,type,check);
+
+      }
+      else {
+        $('<li class="sent"><img src="img/male.jpg" alt="" /><p >'+messages+'</p></li>').appendTo($('.message ul'));
+        setTimeout(function(){  $('<li class="recieve"><img src="img/bot.png" alt="" /><p style = "margin-top : 4px;">ขีดค่าเรียบร้อย</p></li>').appendTo($('.message ul'));
+            $('.message-input input').val(null);
+            $(".message").animate({scrollTop: 10000000}, "fast");}, 300);
+
+
+        var type = "receive";
+
+        writeMsg(name,messages,type,'no');
+        writeMsg(name,'ขีดค่าเรียบร้อย',type,'no');
+
+        setTimeout(function(){ messageType = 'message'; }, 300);
+        firebase.database().ref('todos/' + name + "/todo_name" + Number(messages)).update({
+            check: 'yes'
+        });
+
+      }
+    }
+
     if(messageType == 'remove'){
       if(messages == '!cancel'){
           $('<li class="recieve"><img src="img/bot.png" alt="" /><p style = "margin-top : 4px;">ยกเลิกคำสั่งลบเรียบร้อยแล้ว</p></li>').appendTo($('.message ul'));
@@ -177,13 +241,40 @@ function newMessage() {
 
         }
 
+        else if(messages == '!check-todo'){
+
+            $('<li class="recieve"><img src="img/bot.png" alt="" /><p style = "margin-top : 4px;">ป้อนตัวเลขของรายการที่ต้องการขีดค่า</p></li>').appendTo($('.message ul'));
+            $('.message-input input').val(null);
+            $(".message").animate({scrollTop: 10000000}, "fast");
+
+            setTimeout(function(){ messageType = 'check'; }, 300);
+
+            writeMsg(name,'ป้อนตัวเลขของรายการที่ต้องการขีดค่า','receive','no');
+
+        }
+
+        else if(messages == '!uncheck-todo'){
+
+            $('<li class="recieve"><img src="img/bot.png" alt="" /><p style = "margin-top : 4px;">ป้อนตัวเลขของรายการที่ต้องการยกเลิกขีดค่า</p></li>').appendTo($('.message ul'));
+            $('.message-input input').val(null);
+            $(".message").animate({scrollTop: 10000000}, "fast");
+
+            setTimeout(function(){ messageType = 'uncheck'; }, 300);
+
+            writeMsg(name,'ป้อนตัวเลขของรายการที่ต้องการยกเลิกขีดค่า','receive','no');
+
+        }
+
 
         else if(messages == '!help'){
           var helplist = '<li class="recieve" style="margin-top : 4px; margin-bottom : 4px;"><img src="img/bot.png" alt="" /><p style = "margin-top : 4px; margin-bottom : 0px;">รายการคำสั่ง</p></li>' +
               '<li class="recieve" style="margin-top : 4px; margin-bottom : 4px;"><img src="img/bot.png" alt="" /><p style = "margin-bottom : 0px;">!set-todo : ใช้บันทึกสิ่งที่ต้องการบันทึก</p></li>' +
               '<li class="recieve" style="margin-top : 4px; margin-bottom : 4px;"><img src="img/bot.png" alt="" /><p style = "margin-bottom : 0px;">!list-todo : แสดงรายการที่บันทึกลงไป</p></li>' +
              '<li class="recieve" style="margin-top : 4px; margin-bottom : 4px;"><img src="img/bot.png" alt="" /><p style = "margin-bottom : 0px;">!list-clear : ลบรายการที่บันทึกลงไปทั้งหมด</p></li>' +
-            '<li class="recieve" style="margin-top : 4px; margin-bottom : 4px;"><img src="img/bot.png" alt="" /><p style = "margin-bottom : 0px;">!chat-clear : ลบประวัติแชททั้งหมด</p></li>';
+            '<li class="recieve" style="margin-top : 4px; margin-bottom : 4px;"><img src="img/bot.png" alt="" /><p style = "margin-bottom : 0px;">!chat-clear : ลบประวัติแชททั้งหมด</p></li>' +
+            '<li class="recieve" style="margin-top : 4px; margin-bottom : 4px;"><img src="img/bot.png" alt="" /><p style = "margin-bottom : 0px;">!remove-todo : ลบรายการที่บันทึก (ระบุหมายเลขหลังจากพิมส่งคำสั่งไปแล้ว)</p></li>' +
+            '<li class="recieve" style="margin-top : 4px; margin-bottom : 4px;"><img src="img/bot.png" alt="" /><p style = "margin-bottom : 0px;">!check-todo : ขีดค่ารายการที่บันทึก (ระบุหมายเลขหลังจากพิมส่งคำสั่งไปแล้ว)</p></li>' +
+            '<li class="recieve" style="margin-top : 4px; margin-bottom : 4px;"><img src="img/bot.png" alt="" /><p style = "margin-bottom : 0px;">!uncheck-todo : ขีดค่ารายการที่บันทึก (ระบุหมายเลขหลังจากพิมส่งคำสั่งไปแล้ว)</p></li>';
 
             $(helplist).appendTo($('.message ul'));
             $('.message-input input').val(null);
@@ -256,11 +347,18 @@ function setName() {
             for(var i = 1; i <= Count ; i++){
                 var txtmsg = obj['msg' + i].message;
                 var typemsg = obj['msg' + i].type;
+                var checkmsg = obj['msg' + i].check;
                 if(typemsg == "send"){
                     msglt = msglt + '<li class="sent"><img src="img/male.jpg" alt="" /><p>' + txtmsg + '</p></li>';
                 }
                 else if(typemsg == "receive"){
+                  if(checkmsg == "yes"){
+                    msglt = msglt + '<li class="recieve"><img src="img/bot.png" alt=""/><p style = "text-decoration: line-through;">' + txtmsg + '</p></li>';
+                  }
+                  else{
                     msglt = msglt + '<li class="recieve"><img src="img/bot.png" alt="" /><p>' + txtmsg + '</p></li>';
+                  }
+
                 }
             }
             $(msglt).appendTo($('.message ul'));
