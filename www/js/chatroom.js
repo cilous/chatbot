@@ -195,13 +195,22 @@ function newMessage() {
             });
         }
 
+        else if(messages == '!chat-clear'){
+            firebase.database().ref('chats/' + name).set({
+              count: 0
+            });
+            Count = 0;
+            location.reload();
+        }
+
 
         else if(messages == '!help'){
 
             $('<li class="recieve" style="margin-top : 4px; margin-bottom : 4px;"><img src="img/bot.png" alt="" /><p style = "margin-top : 4px; margin-bottom : 0px;">รายการคำสั่ง</p></li>' +
                 '<li class="recieve" style="margin-top : 4px; margin-bottom : 4px;"><img src="img/bot.png" alt="" /><p style = "margin-bottom : 0px;">!set-todo : ใช้บันทึกสิ่งที่ต้องการบันทึก</p></li>' +
                 '<li class="recieve" style="margin-top : 4px; margin-bottom : 4px;"><img src="img/bot.png" alt="" /><p style = "margin-bottom : 0px;">!list-todo : แสดงรายการที่บันทึกลงไป</p></li>' +
-               '<li class="recieve" style="margin-top : 4px; margin-bottom : 4px;"><img src="img/bot.png" alt="" /><p style = "margin-bottom : 0px;">!list-clear : ลบรายการที่บันทึกลงไปทั้งหมด</p></li>').appendTo($('.message ul'));
+               '<li class="recieve" style="margin-top : 4px; margin-bottom : 4px;"><img src="img/bot.png" alt="" /><p style = "margin-bottom : 0px;">!list-clear : ลบรายการที่บันทึกลงไปทั้งหมด</p></li>' +
+              '<li class="recieve" style="margin-top : 4px; margin-bottom : 4px;"><img src="img/bot.png" alt="" /><p style = "margin-bottom : 0px;">!chat-clear : ลบประวัติแชททั้งหมด</p></li>').appendTo($('.message ul'));
             $('.message-input input').val(null);
             $(".message").animate({scrollTop: 10000000}, "fast");
 
@@ -224,6 +233,11 @@ $(window).on('keydown', function (e) {
         return false;
     }
 });
+
+function onclickmsg(){
+  $(".message").animate({scrollTop: 10000000}, "fast");
+}
+
 
 $(".message").animate({scrollTop: 10000000 }, "fast");
 
