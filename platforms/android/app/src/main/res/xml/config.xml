@@ -7,9 +7,9 @@
     <feature name="BuildInfo">
         <param name="android-package" value="org.apache.cordova.buildinfo.BuildInfo" />
     </feature>
-    <name>HelloCordova</name>
+    <name>ChatBot</name>
     <description>
-        A sample Apache Cordova application that responds to the deviceready event.
+        ChatBot To Do list.
     </description>
     <author email="dev@cordova.apache.org" href="http://cordova.io">
         Apache Cordova Team

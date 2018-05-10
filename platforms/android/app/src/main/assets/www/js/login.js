@@ -1,4 +1,10 @@
-var database = firebase.database();
+
+function writeUserData(uid,name) {
+  firebase.database().ref('users/' +name).set({
+    uid : uid
+  });
+}
+
 
 
 $('#login').on('click', async function(){
@@ -11,8 +17,16 @@ $('#login').on('click', async function(){
         console.log("login failed")
         // alert(errorMessage)
         // สร้าง user ใหม่ใน database
+        firebase.auth().createUserWithEmailAndPassword(username.toString(), password ).catch(function(error) {
+          // Handle Errors here.
+          var errorCode = error.code;
+          var errorMessage = error.message;
+          // ...
+        });
+        var uid = firebase.auth().currentUser.uid
+        writeUserData(uid,$('#username').val());
     })
-    console.log("login success")
+    console.log("login success");
     window.location = 'chatroom.html?name=' + $('#username').val();
 
     // ทำการดึงข้อมูลใน database

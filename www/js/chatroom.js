@@ -87,6 +87,25 @@ function newMessage() {
     }
 
     if(messageType == 'message'){
+        $('<li class="sent"><img src="img/male.jpg" alt="" /><p >' + messages + '</p></li>').appendTo($('.message ul'));
+        $('.message-input input').val(null);
+        $(".message").animate({scrollTop: 10000000}, "fast");
+
+        var date = new Date();
+        var time = date.getTime();
+        var type = "send";
+        Count = Count + 1;
+        var msgDocName = "msg" + Count;
+        firebase.database().ref('chats/' + name).update({
+            count: Count
+          });
+
+        firebase.database().ref('chats/' + name + '/' + msgDocName).set({
+          message: messages,
+          time: time,
+          type: type
+        });
+
         if(messages == '!set-todo'){
 
 
@@ -126,25 +145,24 @@ function newMessage() {
                     for(var i = 1; i <= countTodos ; i++){
                         var txtmsg = obj['todo_name' + i].info;
                         msglt = msglt + '<li class="recieve"><img src="img/bot.png" alt="" /><p style = "margin-top : 4px;">' + txtmsg + '</p></li>';
+                        var date = new Date();
+                        var time = date.getTime();
+                        var type = "receive";
+                        Count = Count + 1;
+                        var msgDocName = "msg" + Count;
+                        firebase.database().ref('chats/' + name).update({
+                            count: Count
+                        });
+
+                        firebase.database().ref('chats/' + name + '/' + msgDocName).set({
+                            message: txtmsg,
+                            time: time,
+                            type: type
+                        });
                     }
                     $(msglt).appendTo($('.message ul'));
                     $('.message-input input').val(null);
                     $(".message").animate({ scrollTop: 10000000 }, "fast");
-
-                    var date = new Date();
-                    var time = date.getTime();
-                    var type = "receive";
-                    Count = Count + 1;
-                    var msgDocName = "msg" + Count;
-                    firebase.database().ref('chats/' + name).update({
-                        count: Count
-                    });
-
-                    firebase.database().ref('chats/' + name + '/' + msgDocName).set({
-                        message: txtmsg,
-                        time: time,
-                        type: type
-                    });
 
                     refToto.off("value");
                 }
@@ -152,23 +170,18 @@ function newMessage() {
             })
 
         }
-        else if(messages == '!help'){
 
-            $('<li class="recieve" style="margin-top : 4px; margin-bottom : 4px;"><img src="img/bot.png" alt="" /><p style = "margin-top : 4px; margin-bottom : 0px;">รายการคำสั่ง</p></li>' +
-                '<li class="recieve" style="margin-top : 4px; margin-bottom : 4px;"><img src="img/bot.png" alt="" /><p style = "margin-bottom : 0px;">!set-todo : ใช้บันทึกสิ่งที่ต้องการบันทึก</p></li>' +
-                '<li class="recieve" style="margin-top : 4px; margin-bottom : 4px;"><img src="img/bot.png" alt="" /><p style = "margin-bottom : 0px;">!list-todo : แสดงรายการที่บันทึกลงไป</p></li>').appendTo($('.message ul'));
+        else if(messages == '!list-clear'){
+            firebase.database().ref('todos/' + name).set({
+              count: 0
+            });
+            $('<li class="recieve"><img src="img/bot.png" alt="" /><p style = "margin-top : 4px;">ลบรายการทั้งหมดเรียบร้อยแล้ว</p></li>').appendTo($('.message ul'));
             $('.message-input input').val(null);
             $(".message").animate({scrollTop: 10000000}, "fast");
-
-        }
-        else {
-            $('<li class="sent"><img src="img/male.jpg" alt="" /><p >' + messages + '</p></li>').appendTo($('.message ul'));
-            $('.message-input input').val(null);
-            $(".message").animate({scrollTop: 10000000}, "fast");
-
+            countTodos = 0;
             var date = new Date();
             var time = date.getTime();
-            var type = "send";
+            var type = "receive";
             Count = Count + 1;
             var msgDocName = "msg" + Count;
             firebase.database().ref('chats/' + name).update({
@@ -176,11 +189,25 @@ function newMessage() {
             });
 
             firebase.database().ref('chats/' + name + '/' + msgDocName).set({
-                message: messages,
+                message: 'ลบรายการทั้งหมดเรียบร้อยแล้ว',
                 time: time,
                 type: type
             });
         }
+
+
+        else if(messages == '!help'){
+
+            $('<li class="recieve" style="margin-top : 4px; margin-bottom : 4px;"><img src="img/bot.png" alt="" /><p style = "margin-top : 4px; margin-bottom : 0px;">รายการคำสั่ง</p></li>' +
+                '<li class="recieve" style="margin-top : 4px; margin-bottom : 4px;"><img src="img/bot.png" alt="" /><p style = "margin-bottom : 0px;">!set-todo : ใช้บันทึกสิ่งที่ต้องการบันทึก</p></li>' +
+                '<li class="recieve" style="margin-top : 4px; margin-bottom : 4px;"><img src="img/bot.png" alt="" /><p style = "margin-bottom : 0px;">!list-todo : แสดงรายการที่บันทึกลงไป</p></li>' +
+               '<li class="recieve" style="margin-top : 4px; margin-bottom : 4px;"><img src="img/bot.png" alt="" /><p style = "margin-bottom : 0px;">!list-clear : ลบรายการที่บันทึกลงไปทั้งหมด</p></li>').appendTo($('.message ul'));
+            $('.message-input input').val(null);
+            $(".message").animate({scrollTop: 10000000}, "fast");
+
+        }
+
+
     }
 
 
